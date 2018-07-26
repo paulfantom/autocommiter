@@ -36,7 +36,7 @@ sed -i "s/_version:.*$/_version: ${VERSION}/" "${DST}/defaults/main.yml"
 # Download hub
 HUB_VERSION="2.5.0"
 curl -sOL "https://github.com/github/hub/releases/download/v${HUB_VERSION}/hub-linux-amd64-${HUB_VERSION}.tgz"
-tar -xvf "hub-linux-amd64-${HUB_VERSION}.tgz"
+tar -xf "hub-linux-amd64-${HUB_VERSION}.tgz"
 cp "hub-linux-amd64-${HUB_VERSION}/bin/hub" ./
 chmod +x hub
 export PATH="${PATH}:$(pwd)"
@@ -51,7 +51,7 @@ git commit -m ':tada: automated upstream release update'
 echo -e "\e[32mPushing to autoupdate branch in ${DST}\e[0m"
 git push "https://${GITHUB_TOKEN}:@github.com/${DST}" --set-upstream autoupdate
 if [ $? -ne 0 ]; then
-    echo -e "\e[32mBranch is already on remote.\e[0m"
+    echo -e "\e[33mBranch is already on remote.\e[0m"
     exit 0
 fi
 REPO="$(echo $SRC | awk -F '/' '{print $2}' )"
