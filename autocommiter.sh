@@ -26,15 +26,13 @@ VERSION="$(curl --silent "https://api.github.com/repos/${SRC}/releases/latest" |
 echo -e "\e[32mNew ${SRC} version is: ${VERSION}\e[0m"
 
 # Download destination repository
-ORIG=$(pwd)
 git clone "https://github.com/${DST}" "${DST}"
-sed -i "s/_version:.*$/_version: ${VERSION}/" "${DST}/defaults/main.yml"
-cd "${DST}"
-if [ -z "$(git diff-index --name-only HEAD --)" ]; then
-    echo -e "\e[32mNothing changed.\e[0m"
+grep "_version: ${VERSION}" "${DST}/defaults/main.yml"
+if [ $? -eq 0 ]; then
+    echo -e "\e[32mNewest version is used.\e[0m"
     exit 0
 fi
-cd $ORIG
+sed -i "s/_version:.*$/_version: ${VERSION}/" "${DST}/defaults/main.yml"
 
 # Download hub
 HUB_VERSION="2.5.0"
@@ -42,7 +40,7 @@ wget "https://github.com/github/hub/releases/download/v${HUB_VERSION}/hub-linux-
 tar -xvf "hub-linux-amd64-${HUB_VERSION}.tgz"
 cp "hub-linux-amd64-${HUB_VERSION}/bin/hub" ./
 chmod +x hub
-export PATH="${PATH}:${ORIG}"
+export PATH="${PATH}:$(pwd)"
 
 # Push new version
 cd "${DST}"
