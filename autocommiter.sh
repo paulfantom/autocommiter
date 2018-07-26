@@ -58,7 +58,7 @@ REPO="$(echo $SRC | awk -F '/' '{print $2}' )"
 export GITHUB_TOKEN=$GITHUB_TOKEN
 hub pull-request -h autoupdate -F- <<< "New ${REPO} upstream release!
 
-Guys at [${SRC}](https://github.com/${SRC}) released new software version - $VERSION! This PR updates code to bring that version into this repository.
+Guys at [${SRC}](https://github.com/${SRC}) released new software version - **${VERSION}**! This PR updates code to bring that version into this repository.
 
 This is an automated PR, if you don't want to receive those, please contact @paulfantom."
 
