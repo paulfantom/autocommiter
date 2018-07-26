@@ -35,7 +35,7 @@ sed -i "s/_version:.*$/_version: ${VERSION}/" "${DST}/defaults/main.yml"
 
 # Download hub
 HUB_VERSION="2.5.0"
-wget "https://github.com/github/hub/releases/download/v${HUB_VERSION}/hub-linux-amd64-${HUB_VERSION}.tgz"
+curl -sOL "https://github.com/github/hub/releases/download/v${HUB_VERSION}/hub-linux-amd64-${HUB_VERSION}.tgz"
 tar -xvf "hub-linux-amd64-${HUB_VERSION}.tgz"
 cp "hub-linux-amd64-${HUB_VERSION}/bin/hub" ./
 chmod +x hub
