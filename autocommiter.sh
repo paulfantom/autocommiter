@@ -49,7 +49,11 @@ git checkout -b autoupdate
 git add "defaults/main.yml"
 git commit -m ':tada: automated upstream release update'
 echo -e "\e[32mPushing to autoupdate branch in ${DST}\e[0m"
-git push "https://${GITHUB_TOKEN}:@github.com/${DST}" --set-upstream autoupdate || exit 1
+git push "https://${GITHUB_TOKEN}:@github.com/${DST}" --set-upstream autoupdate
+if [ $? -ne 0 ]; then
+    echo -e "\e[32mBranch is already on remote.\e[0m"
+    exit 0
+fi
 REPO="$(echo $SRC | awk -F '/' '{print $2}' )"
 export GITHUB_TOKEN=$GITHUB_TOKEN
 hub pull-request -h autoupdate -F- <<< "New ${REPO} upstream release!
