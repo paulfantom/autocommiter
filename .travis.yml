@@ -10,7 +10,6 @@ env:
 
 script:
   - bash autocommiter.sh
-
 branches:
   only:
     - master
