@@ -47,7 +47,7 @@ cd "${DST}"
 git config user.email "${GIT_MAIL}"
 git config user.name "${GIT_USER}"
 git checkout -b autoupdate
-git add "defaults/main.yml"
+git add "defaults/main.yml" "README.md"
 git commit -m ':tada: automated upstream release update'
 echo -e "\e[32mPushing to autoupdate branch in ${DST}\e[0m"
 git push "https://${GITHUB_TOKEN}:@github.com/${DST}" --set-upstream autoupdate
