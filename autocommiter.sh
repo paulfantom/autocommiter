@@ -32,7 +32,7 @@ if [ $? -eq 0 ]; then
     exit 0
 fi
 sed -i "s/_version:.*$/_version: ${VERSION}/" "${DST}/defaults/main.yml"
-sed -i -r "s/_version.*[0-9.]+/_version\` | ${VERSION}/" "${DST}/README.md"
+sed -i -r "s/_version.*[0-9].[0-9].[0-9]/_version\` | ${VERSION}/" "${DST}/README.md"
 
 # Download hub
 HUB_VERSION="2.5.0"
